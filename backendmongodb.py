@@ -38,7 +38,7 @@ def handle_requests():
                 g.collection = g.db[coleccion]
 
             if accion == "listaof":
-                limit = request.args.get('limit', '1')
+                limit = request.args.get('limit', '')
                 sort = request.args.get('sort', '')
                 campo = request.args.get('campo', '')
                 valor = request.args.get('valor', '')
@@ -63,20 +63,20 @@ def handle_requests():
                     return jsonify({'message': 'No hay datos'})
 
             if accion == "lista":
-                limit = request.args.get('limit', '1')
+                limit = request.args.get('limit', '')
                 sort = request.args.get('sort', '')            
                 count = g.collection.count_documents({})
                 if count > 0:
                     resultados = g.collection.find()
                     if limit:
-                        resultados = g.collection.find(Q_filter).limit(int(limit))
+                        resultados = g.collection.find().limit(int(limit))
                         
                     if sort:
                         paran = sort.split(',')
                         if paran[1] == "asc":
-                            resultados = g.collection.find(Q_filter).sort(paran[0], pymongo.ASCENDING)
+                            resultados = g.collection.find().sort(paran[0], pymongo.ASCENDING)
                         if paran[1] == "desc":
-                            resultados = g.collection.find(Q_filter).sort(paran[0], pymongo.DESCENDING)                                            
+                            resultados = g.collection.find().sort(paran[0], pymongo.DESCENDING)                                            
                     
                     json_data = json_util.dumps(resultados)
                     parsed_data = json.loads(json_data)
