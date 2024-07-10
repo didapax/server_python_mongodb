@@ -62,7 +62,7 @@ def handle_requests():
                 else:
                     return jsonify({'message': 'No hay datos'})
 
-            if accion == "lista":
+            elif accion == "lista":
                 limit = request.args.get('limit', '')
                 sort = request.args.get('sort', '')            
                 count = g.collection.count_documents({})
@@ -118,7 +118,7 @@ def handle_requests():
                 else:
                     mensaje = "insert fail"
                     
-            if tipo == "insert_many":
+            elif tipo == "insert_many":
                 # Implementa la lógica para insertar multipes documentos
                 datos = data.pop("tipo", None)
                 datos = data.pop("coleccion", None)
@@ -164,10 +164,8 @@ def handle_requests():
 
             else:
                 return jsonify({'error': 'Tipo de operación no válida'}), 400
-
-            response_data = {'message': f"{mensaje}"}
-            # Devolver la respuesta como JSON
-            return jsonify(response_data)
+        else
+            return jsonify({'error': 'No encuentra la página o recurso solicitado'}), 404
 
     except Exception as e:
         # Manejar cualquier excepción aquí
@@ -176,5 +174,4 @@ def handle_requests():
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
-    
-    
+
