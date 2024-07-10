@@ -164,7 +164,7 @@ def handle_requests():
 
             else:
                 return jsonify({'error': 'Tipo de operación no válida'}), 400
-        else
+        else:
             return jsonify({'error': 'No encuentra la página o recurso solicitado'}), 404
 
     except Exception as e:
