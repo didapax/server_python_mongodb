@@ -10,12 +10,10 @@ headers = {"Content-Type": "application/json"}
 def before_request():
     # Abre la conexión antes de cada solicitud
 
-
 @app.teardown_request
 def teardown_request(exception=None):
     # Cierra la conexión después de cada solicitud
 
-        
 
 @app.route('/', methods=['GET', 'POST'])
 def handle_requests():
