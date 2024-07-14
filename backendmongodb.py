@@ -14,6 +14,8 @@ app = Flask(__name__)
 #Tipo puede ser ['insert','update','delete','auth']
 #
 
+headers = {"Content-Type": "application/json"}
+
 def leer_archivo_json(ruta_archivo):
     try:
         with open(ruta_archivo, "r") as archivo:
@@ -67,7 +69,6 @@ def agregar_elemento_lista_json(ruta_archivo, clave_lista="", nuevo_elemento):
                 return
 
         update_dic_json(ruta_archivo, datos_json)
-
 
 @app.before_request
 def before_request():
@@ -229,4 +230,5 @@ def handle_requests():
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
-
+    
+    
