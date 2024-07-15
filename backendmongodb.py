@@ -185,10 +185,13 @@ def handle_requests():
                     mensaje = "insert fail"                    
 
             elif tipo == "update":
-                # Implementa la lógica para actualizar un documento
+                # Implementa la lógica para actualizar un 
+                criterio = data.get('criterio', '')
                 datos = data.pop("tipo", None)
                 datos = data.pop("coleccion", None)
-                result = g.collection.update_one(data)
+                #elmimino criterio de la data pero ya la tengo asignada en la variable arriba
+                datos = data.pop("criterio", None) 
+                result = g.collection.update_one(criterio, {"$set": data})
                 if result.modified_count > 0:
                     mensaje = "update exitoso"
                 else:
